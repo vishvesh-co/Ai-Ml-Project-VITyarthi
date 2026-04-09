@@ -11,30 +11,33 @@ number = input("Enter the number of characters for the password: ")
 while True:
     try:
         number = int(number)
-    except:
-        number = input("Please enter a integer digit only: ")
+        if number < 4:
+            number = input("Password must be at least 4 characters. Try again: ")
+            continue
+    except ValueError:
+        number = input("Please enter an integer digit only: ")
         continue
     break
-random.shuffle(low)
-random.shuffle(up)
-random.shuffle(digits)
-random.shuffle(specials)
 
-part1 = round(number * 0.25)
-part2 = round(number * 0.25)
-part3 = round(number * 0.25)
-part4 = round(number * 0.25)
+
+part1 = number // 4
+part2 = number // 4
+part3 = number // 4
+part4 = number - part1 - part2 - part3
 
 password = []
 
 for i in range(part1):
     password.append(random.choice(low))
 
+
 for i in range(part2):
     password.append(random.choice(up))
 
+
 for i in range(part3):
     password.append(random.choice(digits))
+
 
 for i in range(part4):
     password.append(random.choice(specials))
@@ -42,4 +45,6 @@ for i in range(part4):
 random.shuffle(password)
 
 High_security_password = "".join(password)
-print("Your generated password is: ", High_security_password)
+
+
+print("Your generated password is:", High_security_password)
